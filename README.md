@@ -15,7 +15,7 @@ _operator overloading and linked data structures_
 
 ### Synopsis
 
-PA2 asks you to update your 3D Point class from [PA1](https://github.com/ivogeorg/ucd-csci2312-pa1) to an arbitrary number of "dimensions", and to create a Cluster class which will hold a big number of Point objects. The Point objects held in a Cluster have to be sorted in pseudo-lexicographic order at all times. You have to write two files, <tt>Point.cpp</tt> and <tt>Cluster.cpp</tt>. See the **Detailed Instructions** at the bottom of this file.
+PA2 asks you to update your 3D Point class from [PA1](https://github.com/ivogeorg/ucd-csci2312-pa1) to an arbitrary number of "dimensions", and to create a Cluster class which will hold a big number of Point objects. The Point objects held in a Cluster have to be sorted in pseudo-lexicographic order at all times. You have to write two files, <tt>Point.cpp</tt> and <tt>Cluster.cpp</tt>. See the [Detailed Instructions](https://github.com/ivogeorg/ucd-csci2312-pa2/blob/master/README.md#detailed-instructions) at the bottom of this file.
 
 PA2 is in the test-driven-development (TDD) style, just like [PA1](https://github.com/ivogeorg/ucd-csci2312-pa1). It has 204 tests that your implementation should pass for full points. Start by creating the two files <tt>Point.cpp</tt> and <tt>Cluster.cpp</tt> so CMake will stop complaining. (Remember to <tt>git add</tt> them to your local repository.) Then start implementing the Point class incrementally. You can comment out all but the first test (<tt>test_point_smoketest(ec);</tt>) in <tt>main.cpp</tt>. When you pass this test, uncomment the next one, and so on.
 
