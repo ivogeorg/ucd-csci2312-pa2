@@ -57,6 +57,68 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 #### Point class
 
+1. The `Point` class represents a point in multidimensional Euclidean space, represented by `double` values. The number of dimensions is an argument to the `Point` constructor. The values of the point should be held in a private _dynamically allocated_ array of `double`s. To handle dynamic memory properly, you have to implement the one-argument constructor, the copy constructor, the assignment operator, and the destructor (the last three are aka _the big three_).
+
+2. The _optional_ second constructor, which takes a number of dimensions and an array of `double`s, is not tested by the test suite. It might be useful for your own testing & debugging needs.
+
+3. Every `Point` should have a unique _id_. The easiest way to achieve this is to use a `static` variable that holds the value of the next _id_. (A `static` variable belongs to the class, not the objects, so there is only one such variable, no matter how many objects of the class are created.) The `Point` constructor should get the current value to assign to the current point, and increment the value for the next point. 
+
+   **Note:** The `static` variable has to be defined and initialized in the <tt>Point.cpp</tt> file as follows:
+   ```C++
+   unsigned int Point::__idGen = 0; // id generator
+   ```
+
+4. Modify the `distanceTo()` function to work for points of arbitrary number of dimensions. Remember that the dimensionality of the `Point` is held in a private variable.
+
+5. Implement the overloaded member `operator*=` and `operator/=` with a single `double` argument. These operators are known as _compound assignment_.
+
+   **Usage:** Each dimension of the current `Point` is multiplied or divided by a factor as follows:
+   ```C++
+   p1 *= 6.3;
+   p2 /= 2.5;
+   ```
+
+6. Implement the overloaded simple arithmetic member `operator*` and `operator/` with a single `double` argument.
+
+   **Usage:** A new `Point` is created and returned with dimensions like the current `Point` but multiplied or divided by a factor as follows:
+   ```C++
+   p1 = p * 6.3;
+   p2 = p * 2.5;
+   ```
+   **Note:** The implementation of these operators is straightforward if the corresponding _compound assignment_ operators are used.
+   
+7. Implement the overloaded non-`const` _subscript_ member `operator[]`.
+
+   **Usage:** Read/write access to each of a `Point`'s values:
+   ```C++
+   p[4] = 7.001;
+   p[5] = p[1] * 1.5;
+   ```
+
+8. Implement the overloaded `friend` _compound assignment_ arithmetic `operator+=` and `operator-=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Dimension-wise addition/substraction of the right-hand `Point` from the left-hand `Point`:
+   ```C++
+   p1 += p2;
+   p3 -= p1;
+   ```
+
+9.  Implement the overloaded `friend` simple arithmetic `operator+` and `operator-` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Dimension-wise addition/substraction of the right-hand `Point` from the left-hand `Point` and the creation and returning of a new `const Point` with the dimension-wise sum/difference of their values:
+   
+   ```C++
+   p1 = p2 + p3;
+   p3 = p1 - p4;
+   ```
+   **Note:** The implementation of these operators is straightforward if the corresponding _compound assignment_ operators are used.
+   **Note:** The return type is a `const` to prevent silly statements like the following:
+   ```C++
+   (p1 + p3) = p5;
+   ```
+   
+10. 
+
 _In progress..._
 
 #### Cluster class
