@@ -301,7 +301,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    if (csv.is_open()) {
       csv >> c;
       csv.close();
-    }
+   }
    ```
    where the file <tt>points.csv</tt> contains
    ```
@@ -314,4 +314,62 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 #### Clustering namespace
 
-_In progress..._
+1. The `Point` and `Cluster` classes are created inside a `namespace`, as follows:
+
+   ```C++
+   namespace Clustering {
+       class Point {
+       };
+   }
+   ```
+
+2. Both the class declarations and the method implementations have to wrapped with the `namespace Clustering {}` blocks.
+
+3. When using the `Point` and `Cluster` classes, the namespace has to be specified, as follows:
+
+   ```C++
+   #include "Point.h"
+   #include "Cluster.h"
+   
+   using Clustering::Point;
+   using Clustering::Cluster;
+   
+   int main() {
+      Point p1(10);
+      Cluster c1;
+      
+      // ...
+      
+      return 0;
+   }
+   ```
+   or
+   ```C++
+   #include "Point.h"
+   #include "Cluster.h"
+   
+   using namespace Clustering;
+   
+   int main() {
+      Point p1(10);
+      Cluster c1;
+      
+      // ...
+      
+      return 0;
+   }
+   ```
+   or
+   ```C++
+   #include "Point.h"
+   #include "Cluster.h"
+   
+   int main() {
+      Clustering::Point p1(10);
+      Clustering::PCluster c1;
+      
+      // ...
+      
+      return 0;
+   }
+   ```
