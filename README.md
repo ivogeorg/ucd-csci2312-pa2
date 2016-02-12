@@ -72,9 +72,11 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    unsigned int Point::__idGen = 0; // id generator
    ```
 
-4. Modify the `distanceTo()` function to work for points of arbitrary number of dimensions. Remember that the dimensionality of the `Point` is held in a private variable.
+4. For the proper operation of the `Point` and `Cluster` classes, the `Point` _copy constructor_ and _assignment operator_ implementations should **copy** the _id_ of the argument, and not generate a new one like the constructor(s).
 
-5. Implement the overloaded member `operator*=` and `operator/=` with a single `double` argument. These operators are known as _compound assignment_.
+5. Modify the `distanceTo()` function to work for points of arbitrary number of dimensions. Remember that the dimensionality of the `Point` is held in a private variable.
+
+6. Implement the overloaded member `operator*=` and `operator/=` with a single `double` argument. These operators are known as _compound assignment_.
 
    **Usage:** Each dimension of the current `Point` is multiplied or divided by a factor as follows:
    ```C++
@@ -82,7 +84,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    p2 /= 2.5;
    ```
 
-6. Implement the overloaded simple arithmetic member `operator*` and `operator/` with a single `double` argument.
+7. Implement the overloaded simple arithmetic member `operator*` and `operator/` with a single `double` argument.
 
    **Usage:** A new `Point` is created and returned with dimensions like the current `Point` but multiplied or divided by a factor as follows:
    ```C++
@@ -91,7 +93,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    ```
    **Note:** The implementation of these operators is straightforward if the corresponding _compound assignment_ operators are used.
    
-7. Implement the overloaded non-`const` _subscript_ member `operator[]`.
+8. Implement the overloaded non-`const` _subscript_ member `operator[]`.
 
    **Usage:** Read/write access to each of a `Point`'s values:
    ```C++
@@ -99,7 +101,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    p[5] = p[1] * 1.5;
    ```
 
-8. Implement the overloaded `friend` _compound assignment_ arithmetic `operator+=` and `operator-=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+9. Implement the overloaded `friend` _compound assignment_ arithmetic `operator+=` and `operator-=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
    **Usage:** Dimension-wise addition/substraction of the right-hand `Point` from the left-hand `Point`:
    ```C++
@@ -108,7 +110,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    ```
    **Note:** Notice that the first (or left-hand) argument is not `const`. The operators modify that `Point` and return a reference to it.
 
-9.  Implement the overloaded `friend` simple arithmetic `operator+` and `operator-` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+10.  Implement the overloaded `friend` simple arithmetic `operator+` and `operator-` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
    **Usage:** Dimension-wise addition/substraction of the right-hand `Point` from the left-hand `Point` and the creation and returning of a new `const Point` with the dimension-wise sum/difference of their values:
    
@@ -122,7 +124,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    (p1 + p3) = p5; // assigns p5 to the temporary new Point object returned by operator+
    ```
    
-10. Implement the overloaded `friend` `operator==` and `operator!=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+11. Implement the overloaded `friend` `operator==` and `operator!=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
    **Usage:** Test two `Point`s for equality or inequality:
    
@@ -137,7 +139,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    **Note:** Two `Point`s are equal **iff** all values are equal dimension-wise, **and** the _id-s_ are also equal.
    **Note:** The implementation of `operator!=` is straightforward with the use of `operator==`.
 
-11. Implement the overloaded `friend` `operator<`, `operator>`, `operator<=`, and `operator>=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+12. Implement the overloaded `friend` `operator<`, `operator>`, `operator<=`, and `operator>=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
    **Usage:** Compare two `Point`s:
    
@@ -152,7 +154,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    **Note:** One `Point` is _smaller_ than another **iff**, for a given dimension position, the value of the first point is **less** than the value of the second point, and all the values on the left, if any, are all equal. The values on the right don't matter. For example, `Point` (5.0, 5.0, 4.5, 10.1, **13.4**, 151.3) is _smaller_ than (5.0, 5.0, 4.5, 10.1, **13.5**, 15.9).
    **Note:** Implement `operator<`, then use it to implement `operator>` and `operator>=`. Finally, use `operator>` to implement `operator<=`.
 
-12. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+13. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
    **Usage:** Right out (intert) a `Point`s to an output stream:
    
@@ -164,7 +166,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    1.2, 4.5, 6.7, 90.12, 34.54, 0.01
    ```
 
-13. Implement the overloaded `friend` extraction `operator>>` with a `std::istream` and a non-`const` `Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+14. Implement the overloaded `friend` extraction `operator>>` with a `std::istream` and a non-`const` `Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
    **Usage:** Read in (extract) a `Point`s from an input stream:
    
@@ -215,8 +217,37 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    ```
    can be used to reuse code. `__del` is used in the destructor and overloaded assignment operator `operator=`, `__cpy` is used in the copy constructor and `operator=`, while `__in` can be helpful for testing, debugging, and even some method implementations.
    
-6. 
+6. Implement the members `add` and `remove` to add `Point`s to and remove `Point`s from a `Cluster`. Notice the `const Point &` arguments and return value for `remove`. The latter allows for a `Point` to be moved from one `Cluster` to another in one line of code, as follows:
 
+   ```C++
+   c5.add(c3.remove(p23));
+   ```
+   **Note:** `add` should create a new `Point` using the copy constructor and not add the argument directly, since it cannot have knowledge about the allocation of the referenced object. If that object is destroyed as its scope is exited, the added object will become invalid after the addition.
+   
+7. Implement the member `contains` to return `true` or `false` if the `Cluster` contains a `Point` equal (by `Point::operator==`) to the object referenced in the argument.
+
+8. Implement the `const` member subscript `operator[]` to return a `const` reference to a particular `Point` in the ordered linked-list. The `Point` cannot be modified.
+   **Note:** Don't overuse this operator, because it is very inefficient for a singly-linked list.
+
+9. Implement the _compound assignment_ member `operator+=` and `operator-=` with a `const Point &` argument.
+
+   **Usage:** Add a `Point` to or remove one from the `Cluster`:
+   ```C++
+   c5 += p56;
+   c2 -= p98;
+   ```
+   **Note:** Implementation is straightforward through the use of `add` and `remove`.
+
+10. Implement the simple arithmetic `friend` `operator+` and `operator-` with one `const Cluster &` and one `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Create and return a new `Cluster` with the argument `Point` added to or removed one from the argument `Cluster`:
+   ```C++
+   c7 = c5 + p56;
+   c9 = c2 - p98;
+   ```
+   **Note:** Implementation is straightforward through the use of `operator+=` and `remove-=`.
+
+11. 
 _In progress..._
 
 #### Clustering namespace
