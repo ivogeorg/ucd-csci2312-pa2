@@ -102,6 +102,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    p1 += p2;
    p3 -= p1;
    ```
+   **Note:** Notice that the first (or left-hand) argument is not `const`. The operators modify that `Point` and return a reference to it.
 
 9.  Implement the overloaded `friend` simple arithmetic `operator+` and `operator-` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
@@ -114,12 +115,62 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    **Note:** The implementation of these operators is straightforward if the corresponding _compound assignment_ operators are used.
    **Note:** The return type is a `const` to prevent silly statements like the following:
    ```C++
-   (p1 + p3) = p5;
+   (p1 + p3) = p5; // assigns p5 to the temporary new Point object returned by operator+
    ```
    
-10. 
+10. Implement the overloaded `friend` `operator==` and `operator!=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
-_In progress..._
+   **Usage:** Test two `Point`s for equality or inequality:
+   
+   ```C++
+   if (p1 == p2) {
+      // ...
+   }
+   if (p3 != p4) {
+      // ...
+   }
+   ```
+   **Note:** Two `Point`s are equal **iff** all values are equal dimension-wise, **and** the _id-s_ are also equal.
+   **Note:** The implementation of `operator!=` is straightforward with the use of `operator==`.
+
+11. Implement the overloaded `friend` `operator<`, `operator>`, `operator<=`, and `operator>=` with two `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Compare two `Point`s:
+   
+   ```C++
+   if (p1 < p2) {
+      // ...
+   }
+   if (p3 >= p4) {
+      // ...
+   }
+   ```
+   **Note:** One `Point` is _smaller_ than another **iff**, for a given dimension position, the value of the first point is **less** than the value of the second point, and all the values on the left, if any, are all equal. The values on the right don't matter. For example, `Point` (5.0, 5.0, 4.5, 10.1, **13.4**, 15.9) is _smaller_ than (5.0, 5.0, 4.5, 10.1, **13.5**, 15.9).
+   **Note:** Implementation `operator<`, then use it to implement `operator>` and `operator>=`, then use `operator>` to implement `operator<=`.
+
+12. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Right out (intert) a `Point`s to an output stream:
+   
+   ```C++
+   cout << p2 << endl;
+   ```
+   **Note:** A `Point` should write itself out as follows (note the _space_ after each comma):
+   ```
+   1.2, 4.5, 6.7, 90.12, 34.54, 0.01
+   ```
+
+13. Implement the overloaded `friend` extraction `operator>>` with a `std::istream` and a non-`const` `Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Read in (extract) a `Point`s from an input stream:
+   
+   ```C++
+   std::string pointString("1.2, 4.5, 6.7, 90.12, 34.54, 0.01");
+   std::stringstream inputStringStream(pointString);
+   Point p(6);
+   inputStringStream >> p;
+   ```
+   **Note:** Notice that the `Point` created to be read has exactly the dimensionality that is necessary to hold the values read out from the input stream.
 
 #### Cluster class
 
