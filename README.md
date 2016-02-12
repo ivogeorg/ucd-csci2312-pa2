@@ -27,7 +27,11 @@ You don't need to submit anything. Once you fork the repository (this is your **
 
 ### Grading
 
-An autograding script will run the test suite against your files. Your grade will be based on the number of tests passed. (E.g. if your code passes 3 out of 6 test cases, your score will be 50% and the grade will be the corresponding letter grade in the course's grading scale). The test suite for PA2 has __204__ tests.
+An autograding script will run the test suite against your files. Your grade will be based on the number of tests passed. (E.g. if your code passes 3 out of 6 test cases, your score will be 50% and the grade will be the corresponding letter grade in the course's grading scale). The test suite for PA2 has __204__ tests. **Note:** The testing and grading will be done with fresh original copies of all the provided files. In the course of development, you can modify them, if you need to, but your changes will not be used. Only your <tt>Point.cpp</tt> and <tt>Cluster.cpp</tt> files will be used.
+
+### Compiler
+
+Your program should run on **GCC 4.9.0** or later, or **Clang 3.3** or later. No other compilers are supported.
 
 ### Due Date
 
