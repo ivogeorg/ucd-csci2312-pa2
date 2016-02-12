@@ -149,8 +149,8 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
       // ...
    }
    ```
-   **Note:** One `Point` is _smaller_ than another **iff**, for a given dimension position, the value of the first point is **less** than the value of the second point, and all the values on the left, if any, are all equal. The values on the right don't matter. For example, `Point` (5.0, 5.0, 4.5, 10.1, **13.4**, 15.9) is _smaller_ than (5.0, 5.0, 4.5, 10.1, **13.5**, 15.9).
-   **Note:** Implementation `operator<`, then use it to implement `operator>` and `operator>=`, then use `operator>` to implement `operator<=`.
+   **Note:** One `Point` is _smaller_ than another **iff**, for a given dimension position, the value of the first point is **less** than the value of the second point, and all the values on the left, if any, are all equal. The values on the right don't matter. For example, `Point` (5.0, 5.0, 4.5, 10.1, **13.4**, 151.3) is _smaller_ than (5.0, 5.0, 4.5, 10.1, **13.5**, 15.9).
+   **Note:** Implement `operator<`, then use it to implement `operator>` and `operator>=`. Finally, use `operator>` to implement `operator<=`.
 
 12. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
@@ -177,6 +177,45 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    **Note:** Notice that the `Point` created to be read has exactly the dimensionality that is necessary to hold the values read out from the input stream.
 
 #### Cluster class
+
+1. The `Cluster` class represents a collection of `Point` objects. It uses a singly-linked list to hold them in **ascending pseudo-lexicographic order**. The list is composed of linked `LNode` objects defined as simple structures, each one pointing to the next one, if any, and the last one holding a `nullptr`, signifying the end of the list:
+
+   ```C++
+   typedef struct LNode *LNodePtr;
+
+   struct LNode {
+      Point point;
+      LNodePtr next;
+      
+      LNode(const Point &p, LNodePtr n);
+   };
+   ```
+   
+2. A `Cluster` can have `Point`s added and removed. During these operations, two conditions have to be maintained:
+  1. The `Point`s should **always** be in the correct _ascending pseudo-lexicographic_ order.
+  2. The `size` parameter of the `Cluster` should **always** be in sync with the true number of `Points`.
+
+3. It is helpful to employ the following two techniques in the implementation of the linked-list manipulation methods:
+  1. Handle separately and in this order the cases of 
+    * Empty list
+    * The first element of the list
+    * All the rest of the elements
+  2. When traversing the list keep track of two variables
+    * A pointer to the current element (e.g. `curr`)
+    * A poitner to the previous element (e.g. `prev`)
+
+4. A linked list is dynamically allocated data structure, so you need to implement _the big three_ (_cpy ctor_, _oper=_, and _dtor_) to manage it correctly. In PA2, `Cluster` has a default constructor, which initializes an _empty_ list.
+
+5. The _optional_ private helper methods
+
+   ```C++
+   void __del();
+   void __cpy(LNodePtr pts);
+   bool __in(const Point &p) const;
+   ```
+   can be used to reuse code. `__del` is used in the destructor and overloaded assignment operator `operator=`, `__cpy` is used in the copy constructor and `operator=`, while `__in` can be helpful for testing, debugging, and even some method implementations.
+   
+6. 
 
 _In progress..._
 
