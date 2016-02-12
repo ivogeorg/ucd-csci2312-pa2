@@ -156,7 +156,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 13. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
-   **Usage:** Right out (intert) a `Point`s to an output stream:
+   **Usage:** Right out (intert) a `Point` to an output stream:
    
    ```C++
    cout << p2 << endl;
@@ -168,7 +168,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 
 14. Implement the overloaded `friend` extraction `operator>>` with a `std::istream` and a non-`const` `Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
 
-   **Usage:** Read in (extract) a `Point`s from an input stream:
+   **Usage:** Read in (extract) a `Point` from an input stream:
    
    ```C++
    std::string pointString("1.2, 4.5, 6.7, 90.12, 34.54, 0.01");
@@ -247,8 +247,70 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    ```
    **Note:** Implementation is straightforward through the use of `operator+=` and `remove-=`.
 
-11. 
-_In progress..._
+11. Implement the _compound assignment_ member `operator+=` and `operator-=` with a `const Cluster &` argument. The addition of two `Cluster`s results in a **union** of the two, which contains all the unique points contained in either `Cluster`. For example, if `c5` contains `p12, p45, p78` and `c6` contains `p23, p45, p90`, then then the _union_ of `c5` and `c6` would contain `p12, p23, p45, p78, p90`. The subtraction of two `Cluster`s results in an **asymmetric difference** of the two. For example, if `c5` contains `p12, p45, p78` and `c6` contains `p23, p45, p90`, then then the **left** _assymetric difference_ of `c5` and `c6` (that is, `c5 - c6`) would contain `p12, p78`, while the **right** _assymetric difference_ of `c5` and `c6` (that is, `c6 - c5`) would contain `p23, p90`.
+
+   **Usage:** Make the calling `Cluster` object the union or assymetric difference of itself and the argument `Cluster` object:
+   ```C++
+   c5 += c6;
+   c2 -= c8;
+   ```
+
+12. Implement the simple arithmetic `friend` `operator+` and `operator-` with two `const Cluster &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Create and return a new `Cluster` object that is the union or assymetric difference of the the two argument `Cluster` objects:
+   ```C++
+   c10 = c5 + c6;
+   c11 = c2 - c8;
+   ```
+  **Note:** Implementation is straighforward through the use of `operator+=` and `operator-=`.
+
+13. Implement the equality and inequality comparison `friend` `operator==` and `operator!=` with two `const Cluster &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared. 
+
+   **Usage:** Check if two `Cluster`s are equal or unequal:
+   ```C++
+   if (c3 == c5) {
+      // ...
+   }
+   if (c3 != c4) {
+      // ...
+   }
+   ```
+   **Note:** Two `Cluster`s are _equal_ **iff** they contain the same `Point`s (by `Point::operator==`).
+
+14. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Cluster &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Right out (intert) a `Cluster` to an output stream:
+   
+   ```C++
+   cout << c7 << endl;
+   ```
+   **Note:** A `Cluster` should write itself by writing its `Point`s in order, each on a separate line, as follows (note the _space_ after each comma):
+   ```
+   1.2, 4.5, 6.7, 90.12, 34.54, 0.01
+   2.2, 4.5, 6.7, 90.12, 34.54, 0.01
+   3.2, 4.5, 6.8, 91.02, 34.04, 0.11
+   ```
+
+14. Implement the overloaded `friend` extraction `operator>>` with a `std::istream` and a non-`const` `Cluster &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
+
+   **Usage:** Read in (extract) a `Cluster` from an input stream:
+   
+   ```C++
+   std::ifstream csv("points.csv");
+   Cluster c;
+   if (csv.is_open()) {
+      csv >> c;
+      csv.close();
+    }
+   ```
+   where the file <tt>points.csv</tt> contains
+   ```
+   00002.3,5.6,0,5.6,7.9
+   1.3, 4.3, 0, 5.6, 7.9
+   2.4  ,  5.6   ,   0,  6.6  ,  7.1
+   4.1,5.6,5,1.6,7.9
+   ```
+   **Note:** The `Cluster` reads the input stream line-by-line, creates a `Point` with the right dimensionality for each line, and then delegates the reading of the line to the `operator<<` for `Point`.
 
 #### Clustering namespace
 
