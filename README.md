@@ -311,6 +311,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    4.1,5.6,5,1.6,7.9
    ```
    **Note:** The `Cluster` reads the input stream line-by-line, creates a `Point` with the right dimensionality for each line, and then delegates the reading of the line to the `operator<<` for `Point`.
+   **Note:** You might find the [std::count](http://en.cppreference.com/w/cpp/algorithm/count) function useful in determining the dimensionality of the Point you need to pass an input line to.
 
 #### Clustering namespace
 
