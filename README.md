@@ -228,6 +228,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
 7. Implement the member `contains` to return `true` or `false` if the `Cluster` contains a `Point` equal (by `Point::operator==`) to the object referenced in the argument.
 
 8. Implement the `const` member subscript `operator[]` to return a `const` reference to a particular `Point` in the ordered linked-list. The `Point` cannot be modified.
+
    **Note:** Don't overuse this operator, because it is very inefficient for a singly-linked list.
 
 9. Implement the _compound assignment_ member `operator+=` and `operator-=` with a `const Point &` argument.
