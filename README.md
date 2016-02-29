@@ -152,6 +152,7 @@ Two websites with C++ Reference, [here](http://en.cppreference.com/w/) and [here
    }
    ```
    **Note:** One `Point` is _smaller_ than another **iff**, for a given dimension position, the value of the first point is **less** than the value of the second point, and all the values on the left, if any, are all equal. The values on the right don't matter. For example, `Point` (5.0, 5.0, 4.5, 10.1, **13.4**, 151.3) is _smaller_ than (5.0, 5.0, 4.5, 10.1, **13.5**, 15.9).
+   
    **Note:** Implement `operator<`, then use it to implement `operator>` and `operator>=`. Finally, use `operator>` to implement `operator<=`.
 
 13. Implement the overloaded `friend` insertion `operator<<` with a `std::ostream` and a `const Point &` arguments. A `friend` operator is a _non-member_ function with **private** access to the class where it is declared.
