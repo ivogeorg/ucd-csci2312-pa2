@@ -43,7 +43,7 @@ Free Github repositories are public so you can look at each other's code. Please
 
 ### Use of libraries
 
-For this assignment, no external libraries should be used, except for the Standard Library minus the Standard Template Library (STD). The implementation of the linked list should be your own. We will use the STD in PA3-PA5.
+For this assignment, no external libraries should be used, except for the Standard Library minus the Standard Template Library (STD). The implementation of the linked list should be your own. We will use the STD in PA4-PA5.
 
 ### Coding style
 
