@@ -371,8 +371,8 @@ void test_point_comparison(ErrorContext &ec, unsigned int numRuns) {
             for (int i = 0; i < 50; i ++) {
                 p1[i] = p2[i] = p3[i] = i;
             }
-            p2[1] = p1[1] + std::numeric_limits<double>::epsilon();
-            p3[1] = p2[1] + std::numeric_limits<double>::epsilon();
+         //   p2[1] = p1[1] + std::numeric_limits<double>::epsilon();
+         //   p3[1] = p2[1] + std::numeric_limits<double>::epsilon();
 
             pass = (p1 < p2) &&
                    (p2 < p3) &&

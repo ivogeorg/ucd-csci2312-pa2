@@ -1,28 +1,29 @@
+// Revised
+
 #ifndef CLUSTERING_CLUSTER_H
 #define CLUSTERING_CLUSTER_H
 
 #include "Point.h"
 
-namespace Clustering {
-
+namespace Clustering
+{
     typedef struct LNode *LNodePtr;
 
-    struct LNode {
-
+    struct LNode
+    {
         Point point;
         LNodePtr next;
         LNode(const Point &p, LNodePtr n);
-
     };
 
-    class Cluster {
-
+    class Cluster
+    {
         int __size;
         LNodePtr __points;
 
-        void __del();
-        void __cpy(LNodePtr pts);
-        bool __in(const Point &p) const;
+        //void __del();
+        //void __cpy(LNodePtr pts);
+        //bool __in(const Point &p) const;
 
 
     public:
