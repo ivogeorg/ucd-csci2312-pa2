@@ -1084,7 +1084,7 @@ void test_cluster_subscript(ErrorContext &ec, unsigned int numRuns) {
             ec.result(pass);
         }
 
-        ec.DESC("cluster with several point");
+        ec.DESC("cluster with several points");
 
         {
             Cluster c;
